@@ -1,0 +1,12 @@
+version: '1.0'
+
+services:
+  postgres:
+    image: postgres:11.13
+    container_name: eff-mobile_tracker
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=0000
+      - POSTGRES_DB=tracker_db
