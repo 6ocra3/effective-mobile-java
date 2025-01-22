@@ -1,5 +1,7 @@
 package effective.mobile.tracker.controller;
 
+import effective.mobile.tracker.dto.auth.LoginRequest;
+import effective.mobile.tracker.dto.auth.LoginResponse;
 import effective.mobile.tracker.dto.auth.RegisterRequest;
 import effective.mobile.tracker.dto.auth.RegisterResponse;
 import effective.mobile.tracker.service.UserService;
@@ -22,8 +24,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public void login(){
-
+    public LoginResponse login(@RequestBody LoginRequest loginRequest){
+        return userService.login(loginRequest);
     }
 
 }

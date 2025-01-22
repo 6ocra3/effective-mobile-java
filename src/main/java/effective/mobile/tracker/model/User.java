@@ -3,6 +3,7 @@ package effective.mobile.tracker.model;
 import effective.mobile.tracker.model.role.Role;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import java.util.HashSet;
 import java.util.Set;

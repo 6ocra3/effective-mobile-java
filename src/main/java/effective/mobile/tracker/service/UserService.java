@@ -1,9 +1,11 @@
 package effective.mobile.tracker.service;
 
+import effective.mobile.tracker.dto.auth.LoginRequest;
 import effective.mobile.tracker.dto.auth.LoginResponse;
 import effective.mobile.tracker.dto.auth.RegisterRequest;
 import effective.mobile.tracker.dto.auth.RegisterResponse;
 import effective.mobile.tracker.exceptions.ExistByLoginException;
+import effective.mobile.tracker.exceptions.NotFoundByLoginException;
 import effective.mobile.tracker.model.User;
 import effective.mobile.tracker.model.role.Role;
 import effective.mobile.tracker.model.role.RoleEnum;
@@ -22,6 +24,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -42,12 +45,10 @@ public class UserService {
 
         User user = new User(registerRequest.getEmail(), passwordEncoder.encode(registerRequest.getPassword()));
         addDefaultRole(user);
-//        userRepository.save(user);
-        log.info(String.valueOf(user));
         userRepository.save(user);
-        log.info("registered");
 
         return new RegisterResponse(
+                authenticate(registerRequest)
         );
 
     }
@@ -59,9 +60,13 @@ public class UserService {
         user.getRoles().add(defaultRole);
     }
 
-    public LoginResponse authenticate(User user){
+    public LoginResponse login(LoginRequest loginRequest){
+        return authenticate(loginRequest);
+    }
+
+    public LoginResponse authenticate(LoginRequest loginRequest){
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                user.getEmail(),user.getPassword()
+                loginRequest.getEmail(),loginRequest.getPassword()
         ));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
