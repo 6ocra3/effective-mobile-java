@@ -1,6 +1,6 @@
 package effective.mobile.tracker.service;
 
-import effective.mobile.tracker.models.User;
+import effective.mobile.tracker.model.User;
 import effective.mobile.tracker.repository.UserRepository;
 import effective.mobile.tracker.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;

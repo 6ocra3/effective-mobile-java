@@ -1,9 +1,8 @@
-package effective.mobile.tracker.models;
+package effective.mobile.tracker.model;
 
-import effective.mobile.tracker.models.role.Role;
+import effective.mobile.tracker.model.role.Role;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,6 +11,8 @@ import java.util.Set;
 @Table(name = "users")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,4 +26,9 @@ public class User {
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
+    public User(String email, String password){
+        this.email = email;
+        this.password = password;
+    }
 }

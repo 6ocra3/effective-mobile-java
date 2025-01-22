@@ -27,6 +27,7 @@ public class SecurityConfig {
     private final JwtUtils jwtUtils;
     private final AuthEntryPointJwt authEntryPointJwt;
 
+    @Bean
     public AuthTokenFilter authTokenFilter() {
         return new AuthTokenFilter(jwtUtils, userDetailsService);
     }
@@ -57,10 +58,10 @@ public class SecurityConfig {
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(authEntryPointJwt))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/auth/**", "/register/**")
+                        auth.requestMatchers("/auth/register", "/auth/**")
                                 .permitAll()
                                 .anyRequest().authenticated());
-        httpSecurity.addFilterBefore(authTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+//        httpSecurity.addFilterBefore(authTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         httpSecurity.authenticationProvider(authenticationProvider());
 
         return httpSecurity.build();

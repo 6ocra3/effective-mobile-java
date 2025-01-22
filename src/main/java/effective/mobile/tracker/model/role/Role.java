@@ -1,4 +1,4 @@
-package effective.mobile.tracker.models.role;
+package effective.mobile.tracker.model.role;
 
 import jakarta.persistence.*;
 import lombok.Getter;

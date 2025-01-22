@@ -1,6 +1,6 @@
 package effective.mobile.tracker.security;
 
-import effective.mobile.tracker.models.User;
+import effective.mobile.tracker.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
