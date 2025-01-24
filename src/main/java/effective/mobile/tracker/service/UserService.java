@@ -5,11 +5,9 @@ import effective.mobile.tracker.dto.auth.LoginResponse;
 import effective.mobile.tracker.dto.auth.RegisterRequest;
 import effective.mobile.tracker.dto.auth.RegisterResponse;
 import effective.mobile.tracker.exceptions.ExistByLoginException;
-import effective.mobile.tracker.exceptions.NotFoundByLoginException;
 import effective.mobile.tracker.model.User;
 import effective.mobile.tracker.model.role.Role;
 import effective.mobile.tracker.model.role.RoleEnum;
-import effective.mobile.tracker.repository.RoleRepository;
 import effective.mobile.tracker.repository.UserRepository;
 import effective.mobile.tracker.security.JwtUtils;
 import effective.mobile.tracker.security.UserDetailsImpl;
@@ -78,5 +76,9 @@ public class UserService {
                 jwt,
                 userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet())
         );
+    }
+
+    public Optional<User> findByEmail(String email){
+        return this.userRepository.findByEmail(email);
     }
 }
