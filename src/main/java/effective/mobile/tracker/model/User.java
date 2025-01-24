@@ -1,11 +1,13 @@
 package effective.mobile.tracker.model;
 
 import effective.mobile.tracker.model.role.Role;
+import effective.mobile.tracker.model.task.Task;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Cascade;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -27,6 +29,9 @@ public class User {
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Task> tasks;
 
     public User(String email, String password){
         this.email = email;
